@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}登录页面{% endblock title %}
+
+{% block script %}
+<script type="text/javascript">
+{# 实现跳转到注册页面 #}
+
+</script>
+{% endblock script %}
+
+{% block body %}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+{#        <div class="modal-body">#}
+{#            <button class="close" data-dismiss="modal">#}
+{#            <span>&times;</span>#}
+{#            </button>#}
+{#        </div>#}
+        <div class="modal-title">
+            <h1 class="text-center">登录</h1>
+        </div>
+        <div class="modal-body">
+            <form method="post" class="form-group csrfmiddlewaretoken" action="">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="">用户名</label>
+                    <input name="username" class="form-control" type="text" placeholder="">
+                </div>
+
+                <div class="form-group"><label for="">密码</label>
+                    <input name="pwd" class="form-control" type="password" placeholder="">
+                </div>
+
+                <div class="checkbox">
+                    <label >
+                    <input name="remember" type="checkbox" value="remember-me"> 记住账号
+                    </label>
+                </div>
+
+                <div class="text-danger text-center">
+                        {{ errmsg }}
+                </div>
+
+
+
+                <div class="text-right">
+                    <button class="btn btn-primary" type="submit">登录</button>
+                    <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                </div>
+
+                <a href="{% url 'user:register' %}">还没有账号？点我注册</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+{#网页底部引入文件块#}
+{% block bottomfiles %}
+    <script type="text/javascript">
+        //点击登录
+        $('')
+    </script>
+{% endblock bottomfiles %}
+
+2
+

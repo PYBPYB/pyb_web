@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+{% block body %}
+{# 文章模块 #}
+<div  class="container jumbotron">
+    <div id="article-page" class="">
+        {# 顶栏导航栏 #}
+        <ol class="breadcrumb">
+            <li><a href="{% url 'user:center' 0 1 %}"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li><a href="/category/PE/">PE</a></li>
+            <li class="hidden-xs"><a><span class="glyphicon glyphicon-calendar"></span> {{ article.data_publish }}</a></li>
+            <li><a>
+                <span class="glyphicon glyphicon-eye-open"></span>
+                {{ article.click_count }}
+            </a></li>
+            <li class="pull-right">
+                <a>
+                <span class="glyphicon glyphicon-user" name="blog-user"  user_id="{{ article.user.id }}"></span>
+                </a>
+            </li>
+        </ol>
+
+        {# 内容的主要信息 #}
+        <div id="article">
+            {# 标题 #}
+            <div class="article-title" name="article-id" article_id="{{ article.id }}" >
+                <h1>{{ article.title }}</h1>
+            </div>
+            {# 标签 还有问题 #}
+{#            <div class="article-tags">#}
+{##}
+{#                <a href="/tag/PE/">#}
+{#                    <span class="label label-vmaig-1 btn">PE</span>#}
+{#                </a>#}
+{##}
+{#                <a href="/tag/%E9%80%86%E5%90%91/">#}
+{#                    <span class="label label-vmaig-2 btn">逆向</span>#}
+{#                </a>#}
+{##}
+{#                <a href="/tag/%E5%8F%8D%E6%B1%87%E7%BC%96/">#}
+{#                    <span class="label label-vmaig-3 btn">反汇编</span>#}
+{#                </a>#}
+{##}
+{#            </div>#}
+        </div>
+        <hr/>{# 分行线 #}
+
+        {# 主要内容 #}
+        <div class="article-content">
+        {{ article.content | safe}}
+        </div>
+    </div>
+    <div>
+    </div>
+</div>
+
+{# 评论显示 #}
+<div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>评论列表</h4>
+            <button id="jump_to_comment" class="btn btn-info comment_title_btn">我要评论</button>
+        </div>
+
+        <div id="comments_list" class="panel-body">
+
+
+                <div class="comment_obj" name="F340">
+                    <div class="comment_user">
+                        <img class="user_avatar" src="/static/media/avatar/447_64_3.jpg" alt="77">
+                        <p class="uesr_name">77</p>
+                    </div>
+
+                    <div class="comment_body">
+                        <div class="comment_content">
+                            <p id="comment_340">支持一下😀</p>
+                        </div>
+
+                        <p class="comment_bottom">
+                            <span>2019-01-23 10:19</span>
+                            <span class='reply_button'>
+                                <a href='javascript:void(0);' onclick='reply_click(this);' root='340' role='340' base='77'>回复</a>
+                            </span>
+                        </p>
+
+
+                        <ul class="comment_reply">
+
+                            <li name='F341'>
+                                <img class="reply_avatar" src="/static/media/avatar/447_64_3.jpg">
+
+                                <div class="reply_body">
+                                    <p>
+
+
+                                            <span class="reply_name">77</span>
+
+                                    </p>
+
+                                    <div class="reply_content">
+                                        <p id="comment_341">顶一下我自己😀</p>
+                                    </div>
+
+                                    <p class="comment_bottom">
+                                        <span>2019-01-23 10:19</span>
+                                        <span class='reply_button'>
+                                            <a href='javascript:void(0);' onclick='reply_click(this);' root='340' role='341' base='77'>回复</a>
+                                        </span>
+                                    </p>
+                                </div>
+                            </li>
+
+                            <li name='F342'>
+                                <img class="reply_avatar" src="/static/media/avatar/447_64_3.jpg">
+
+                                <div class="reply_body">
+                                    <p>
+
+
+                                            <span class="reply_name">77</span>
+                                            <span> 回复 </span>
+                                            <span class="reply_name">77</span>
+
+                                    </p>
+
+                                    <div class="reply_content">
+                                        <p id="comment_342">这个讲的很棒😀</p>
+                                    </div>
+
+                                    <p class="comment_bottom">
+                                        <span>2019-01-23 10:20</span>
+                                        <span class='reply_button'>
+                                            <a href='javascript:void(0);' onclick='reply_click(this);' root='340' role='342' base='77'>回复</a>
+                                        </span>
+                                    </p>
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                    <span class="clearfix"></span>
+                </div>
+
+        </div>
+    </div>
+
+{# 新建评论 #}
+<div class="container jumbotron">
+    <div id="div1" class="well-sm" >
+    </div>
+    <input type="button" name="input" class="btn btn-primary btn-block " id="btn_input" value="提交">
+</div>
+
+
+{% endblock body %}
+{% block bottomfiles %}
+<script type="text/javascript" src="/static/js/wangEditor.min.js"></script>
+<script type="text/javascript">
+var E = window.wangEditor
+var editor = new E('#div1')
+
+{# jango 信息认证 #}
+csrf = $('input[name=csrfmiddlewaretoken]').val()  // Django认证信息
+
+{#editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片#}
+editor.customConfig.uploadImgServer = "/image"  // 上传图片到服务器
+editor.customConfig.uploadFileName = 'image'
+{# 自定义参数 #}
+editor.customConfig.uploadImgParams = {
+    csrfmiddlewaretoken: csrf
+}
+
+{# 菜单栏配置 #}
+editor.customConfig.menus = [
+//'head',  // 标题
+//'bold',  // 粗体
+//'fontSize',  // 字号
+'fontName',  // 字体
+'italic',  // 斜体
+'underline',  // 下划线
+'strikeThrough',  // 删除线
+'foreColor',  // 文字颜色
+'backColor',  // 背景颜色
+'link',  // 插入链接
+//'list',  // 列表
+//'justify',  // 对齐方式
+'quote',  // 引用
+'emoticon',  // 表情
+'image',  // 插入图片
+'table',  // 表格
+//'video',  // 插入视频
+'code',  // 插入代码
+'undo',  // 撤销
+'redo'  // 重复
+]
+
+editor.create()
+
+// 提交文本内容
+document.getElementById('btn_input').addEventListener('click', function () {
+
+    // 获取参数
+    content = editor.txt.html()  //评论内容
+    article_user_id = $('span[name="blog-user"]').attr('user_id')  //获取文章作者的id
+    article_id = $('div[name="article-id"]').attr('article_id')
+    pid = 1  //父级评论的id
+    alert(articleid)
+    // 组织参数
+    params = {'content':content,'article_user_id':article_user_id, 'article_id':article_id,'pid':pid , 'csrfmiddlewaretoken': csrf}
+    // 发送ajax请求
+     $.ajax({
+        url:"{% url 'public:comment' %}",
+        type:'POST',
+        data: params,
+        processData: false,  // tell jquery not to process the data
+        contentType: false, // tell jquery not to set contentType
+        success: function(data) {
+            if(data.res == 0){
+                location.reload()
+            }
+
+        }
+    }); // end ajax
+}, false)
+
+ //追加内容 在修改文件时能容到
+editor.txt.html('')
+
+</script>
+{% endblock bottomfiles %}
+

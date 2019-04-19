@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!--百度收录标识-->
+    <meta name="baidu-site-verification" content="ocAh7mV3PU" />
+    <title>{% block title %}{% endblock title %}</title>
+    <!--全局样式-->
+    <link rel="stylesheet" type="text/css" href="/static/css/global/all-2.0.1.css">
+    <!--使用bootstrap框架-->
+    <link href="/static/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/vmaig.css">
+    <link rel="stylesheet" href="/static/css/vmaig_comments.css">
+    <link rel="stylesheet" href="/static/css/vmaig_auth.css">
+    <link rel="stylesheet" href="/static/css/jquery.Jcrop.min.css">
+    <script src="/static/js/jquery/jquery-2.1.3.min.js"></script>
+    <script src="/static/js/jquery/jquery.cookie.js"></script>
+    <script src="/static/js/jquery/jquery.form.js"></script>
+    <script src="/static/js/jquery/jquery.Jcrop.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+
+
+    {# 富文本编辑器的使用 #}
+{#    {{ form.media }}#}
+
+    <!--百度收录自动提交-->
+{#    <script src="//push.zhanzhang.baidu.com/push.js"></script>#}
+
+    <!--其他-->
+    <link rel="shortcut icon" href="/static/media/favicon.ico">
+    <script src="/static/js/jquery/jquery.cookie.js"></script>
+    <!--IE html5支持-->
+    <!--[if lt IE 9]>
+        <script src="/static/js/html5shiv.js"></script>
+    <![endif]-->
+
+{#    <meta name="keywords" content="杨仕航,技术博客,原创"/>#}
+{#    <meta name="description" content="杨仕航的个人博客，发表原创高质量的技术博客。不定期会更新一些博文和教程。"/>#}
+
+    <meta property="qc:admins" content="2432675160247763757" />
+
+    <meta property="wb:webmaster" content="4b3e8d2410ddcc24" />
+
+    <script src="/static/js/highcharts.js"></script>
+
+    <link rel="stylesheet" href="/static/css/global/home-2.0.2.css">
+
+</head>
+
+<body>
+
+<header class="navbar navbar navbar-static-top navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+        data-target="#example-navbar-collapse">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">黑白世界</a>
+        </div>
+        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li class="">{# active #}
+                <a href="/">
+                    <span class="glyphicon glyphicon-home"></span> 首页
+                </a>
+            </li>
+            <li class="">
+                <a href="{% url 'user:center' 0 1 %}">
+                    <span class="glyphicon glyphicon-user"></span> 个人中心
+                </a>
+            </li>
+        </ul>
+
+        <form action="/blog/" class="navbar-form navbar-right">
+            <input name="wd" type="text" placeholder="搜索博文" class="form-control">
+            <button type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </form>
+
+        <ul id="user_part" class="nav navbar-nav navbar-right">
+
+                <li role="presentation" class="dropdown">
+
+                    {% if user.is_authenticated %}
+
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <img class="navbar-header navbar-avatar" src="{{ user.avatar }}"/>
+                            欢迎，
+                            {{ user.username }}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+
+                            <li><a href="{% url 'user:logout' %}">退出</a></li>
+                        </ul>
+
+
+                    {% else  %}
+                    <a href="{% url 'user:login' %}">登录/注册</a>
+                    {% endif %}
+
+                </li>
+        </ul>
+    </div>
+    </div>
+
+</header>
+
+
+    {% block body %}{% endblock body %}
+
+{# 页底 #}
+ <div id="footer" class="page-bottom">
+        <div class="container">
+                <div class="col-sm-4 hidden-xs">
+                    <div class="content">
+                        <h4 class="title">关于本站</h4>
+                        <p>1、基于Django+Bootstrap开发</p>
+                        <p>2、主要发表本人的技术原创博客</p>
+                        <p>3、本站于 2015-12-01 开始建站</p>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="content">
+                        <h4 class="title">建议反馈</h4>
+                        <p>1、可在相应的博文底下评论</p>
+                        <p>2、发邮件到2872402050@qq.com</p>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 hidden-xs">
+                    <div class="content">
+                        <h4 class="title">友情链接</h4>
+                        <p><a href="https://zqyhdm.com/" target=_blank>再敲一行代码</a></p>
+                        <p><a href="https://jq.qq.com/?_wv=1027&k=5lSm3eD" title="QQ群：701914136（点击加群）" target=_blank>QQ群：701914136</a></p>
+                    </div>
+                </div>
+            </div>
+        <div class="copyright">
+                <span>Welcome to visit my website &copy; Haddy Yang</span>
+            </div>
+ </div>
+
+
+
+
+
+    {#网页底部html元素块#}
+    {% block bottom %}{% endblock bottom %}
+
+    {#网页底部引入文件块#}
+    {% block bottomfiles %}
+
+    {% endblock bottomfiles %}
+</body>
+</html>

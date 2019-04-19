@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% block title %}写博客的页面{% endblock title %}
+
+{% block body %}
+{# 写博客 #}
+<div  class="container theme-showcase" role="main">
+    <div class="jumbotron well home-post ">
+
+        <form href="" class="form-horizontal csrfmiddlewaretoken" enctype="multipart/form-data">
+            {% csrf_token %}
+            {# 输入文章标题 title #}
+            <div class="form-group">
+                <label for="inputPassword" class="col-sm-2 control-label">文章标题</label>
+                <div class="col-sm-10">
+                    <input name="title" type="text" class="form-control" id="inputtitle" placeholder="title">
+                </div>
+            </div>
+
+            {# 文章分类 #}
+            <div class="form-group">
+                <div class="col-sm-2 control-label">
+                   <label for="" class=" ">文章分类</label>
+                </div>
+                <div  class="col-sm-4">
+                     <select id="category_input" class=" form-control">
+                        {% for category in categorys %}
+                        <option value="{{ category.index }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="alert-info alert-danger col-sm-4" role="alert">以后会增加用户自定义 或者 自动识别</div>
+            </div>
+
+            {# 上传文章封面图片 desc #}
+            <div class="form-group">
+                <label for="inputPassword" class="col-sm-2 control-label">封面图片</label>
+                <div class="col-sm-10">
+                    <input id ="input-image" name="input-image" type="file">
+                </div>
+            </div>
+
+            {# 文章标签 tag #}
+            <div class="form-group">
+                <label for="inputPassword" class="col-sm-2 control-label">文章标签</label>
+                <div class="col-sm-10">
+                    <input name="tag" type="text" class="form-control" id="inputtag" placeholder="标签1 标签2 标签3 。。。（标签之间以空格隔开）">
+                </div>
+            </div>
+
+            {# 输入文章描述信息 desc #}
+            <div class="form-group">
+                <label for="inputPassword" class="col-sm-2 control-label">描述信息</label>
+                <div class="col-sm-10">
+                    <textarea name="desc" type="text" class="form-control" id="inputdesc" placeholder="可以从主体内容截取最具有代表性的文字片段哦">
+                    </textarea>
+                </div>
+            </div>
+
+            {# 文章内容主体 content 富文本输入框 #}
+            <div class="form-group">
+                <div id="div1" style="border: 1px solid #ccc;" class="toolbar form-control">
+                </div>
+
+                <div style="padding: 5px 0; color: #ccc"></div>
+
+                <div id="div2" style="border: 1px solid #ccc;height: 800px;" class='text min-height'> <!--可使用 min-height 实现编辑区域自动增加高度-->
+                    <p>在这里输入主要内容</p>
+                </div>
+            </div>
+
+
+            {# 提交  #}
+            <div  class="">
+                <input type="button" name="input" class="btn btn-primary btn-block " id="btn_input" value="提交">
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock body %}
+
+{#网页底部引入文件块#}
+{% block bottomfiles %}
+<script type="text/javascript" src="/static/js/wangEditor.min.js"></script>
+<script type="text/javascript">
+    var E = window.wangEditor
+    var editor = new E('#div1', '#div2')
+
+    {# jango 信息认证 #}
+    csrf = $('input[name=csrfmiddlewaretoken]').val()  // Django认证信息
+
+    {#editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片#}
+    {# 上传图片 #}
+    editor.customConfig.uploadImgServer = "/image"  // 上传图片到服务器
+    editor.customConfig.uploadFileName = 'image'
+    {# 自定义参数 #}
+    editor.customConfig.uploadImgParams = {
+        csrfmiddlewaretoken: csrf
+    }
+
+
+    {# 菜单栏配置 #}
+    editor.customConfig.menus = [
+    'head',  // 标题
+    'bold',  // 粗体
+    'fontSize',  // 字号
+    'fontName',  // 字体
+    'italic',  // 斜体
+    'underline',  // 下划线
+    'strikeThrough',  // 删除线
+    'foreColor',  // 文字颜色
+    'backColor',  // 背景颜色
+    'link',  // 插入链接
+    'list',  // 列表
+    'justify',  // 对齐方式
+    'quote',  // 引用
+    'emoticon',  // 表情
+    'image',  // 插入图片
+    'table',  // 表格
+    //'video',  // 插入视频
+    'code',  // 插入代码
+    'undo',  // 撤销
+    'redo'  // 重复
+    ]
+
+    editor.create()
+
+
+
+
+    {# 提交文本内容 #}
+    document.getElementById('btn_input').addEventListener('click', function () {
+
+        title = $('input[name="title"]').val()  // title：文章标
+        category = $("#category_input option:selected").text()  // category:文章分类
+        image = $('#input-image')[0].files[0]// iamge:封面图片对象
+        tag = $('input[name="tag"]').val()  // tag:文章标签
+        desc = $('input[name="desc"]').val() // desc:描述信息
+        content = editor.txt.html()  // content:内容
+
+
+        //首先判断参数是否为空
+        if (title == ''){
+            alert('文章标题为空')
+            return false
+        }
+        else if (tag == ''){
+            alert('没有指明文章标签')
+            return false
+        }
+        else if (desc == ''){
+            alert('没有类型')
+            return false {# 不跳转页面 #}
+        }
+        else if (content == '<p></p><p><br></p>'){
+            alert('文章内容为空')
+            return false
+        }
+        else {
+            // 组织参数
+            // 提取image附件
+            var params = new FormData();
+            params.append('title', title)
+            params.append('category', category)
+            params.append('image', image)
+            params.append('tag', tag)
+            params.append('desc', desc)
+            params.append('csrfmiddlewaretoken', csrf)
+            params.append('content', content)
+
+
+
+
+            $.ajax({
+                url:"{% url 'user:write' %}",
+                type:'POST',
+                data: params,
+                processData: false,  // tell jquery not to process the data
+                contentType: false, // tell jquery not to set contentType
+                success: function(data) {
+                    if(data.res == 0){
+                        window.location.href = "/user/details/" + data.article_id
+                    }
+                    console.log(order_id)
+                }
+            }); // end ajax
+        }
+
+    }, false)
+
+    {# 追加内容 在修改文件时能容到 #}
+    {#editor.txt.html('')#}
+
+</script>
+{% endblock bottomfiles %}
