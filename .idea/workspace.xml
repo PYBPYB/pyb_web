@@ -9,6 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a3daf912-4bca-459d-97bf-d1bf895b1b28" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../dailyfreshTow/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../dailyfreshTow/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyb_web/settings/production.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyb_web/settings/production.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +65,9 @@
           <entry key="jpeg" value="2" />
           <entry key="jpg" value="1" />
           <entry key="js" value="35" />
+          <entry key="log" value="1" />
           <entry key="map" value="2" />
+          <entry key="pid" value="1" />
           <entry key="py" value="397" />
           <entry key="svg" value="3" />
           <entry key="text" value="1" />
@@ -78,7 +81,8 @@
           <entry key="Image" value="6" />
           <entry key="Ini" value="1" />
           <entry key="JavaScript" value="35" />
-          <entry key="PLAIN_TEXT" value="10" />
+          <entry key="Log" value="1" />
+          <entry key="PLAIN_TEXT" value="11" />
           <entry key="Python" value="397" />
           <entry key="SVG" value="3" />
           <entry key="SourceMap" value="2" />
@@ -93,7 +97,7 @@
           <entry key="html" value="15419" />
           <entry key="ini" value="29" />
           <entry key="js" value="41" />
-          <entry key="py" value="11839" />
+          <entry key="py" value="11869" />
           <entry key="txt" value="116" />
         </counts>
       </usages-collector>
@@ -104,7 +108,7 @@
           <entry key="Ini" value="29" />
           <entry key="JavaScript" value="41" />
           <entry key="PLAIN_TEXT" value="130" />
-          <entry key="Python" value="11846" />
+          <entry key="Python" value="11876" />
         </counts>
       </usages-collector>
     </session>
@@ -120,7 +124,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pyb_web/settings/base.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-374">
@@ -150,13 +154,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/uwsgi.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
+            <state relative-caret-position="264">
               <caret line="15" column="12" lean-forward="true" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pyb_web/wsgi.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="352">
@@ -169,10 +173,20 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/uwsgi.pid">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/uwsgi.log">
+          <provider selected="true" editor-type-id="LogFileEditorProvider" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pyb_web/settings/production.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-110">
-              <caret line="35" column="40" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
+            <state relative-caret-position="1122">
+              <caret line="52" column="46" selection-start-line="52" selection-start-column="46" selection-end-line="52" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -181,15 +195,6 @@
         <entry file="file://$PROJECT_DIR$/requirements.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1308" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="51" column="22" lean-forward="true" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
-            </state>
           </provider>
         </entry>
       </file>
@@ -217,7 +222,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/db/base_model.py" />
         <option value="$PROJECT_DIR$/db/Custom_Verify.py" />
         <option value="$PROJECT_DIR$/static/css/vmaig.css" />
         <option value="$PROJECT_DIR$/static/css/vmaig_comments.css" />
@@ -268,6 +272,7 @@
         <option value="$PROJECT_DIR$/pyb_web/settings/development.py" />
         <option value="$PROJECT_DIR$/templates/user.html" />
         <option value="$PROJECT_DIR$/uwsgi.ini" />
+        <option value="$PROJECT_DIR$/pyb_web/settings/production.py" />
       </list>
     </option>
   </component>
@@ -471,7 +476,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.56401384" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5008104" side_tool="true" weight="0.39700806" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49918962" visible="true" weight="0.34244946" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49918962" visible="true" weight="0.23662306" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3298731" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -491,8 +496,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="1.0" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apps/webmaster/views.py" />
-    <entry file="file://$PROJECT_DIR$/apps/webmaster/urls.py" />
     <entry file="file://$PROJECT_DIR$/apps/webmaster/models.py" />
     <entry file="file://$PROJECT_DIR$/apps/user/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
@@ -760,31 +763,10 @@
         <state relative-caret-position="-1308" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pyb_web/settings/production.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-110">
-          <caret line="35" column="40" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pyb_web/settings/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-374">
-          <caret line="19" column="17" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pyb_web/settings/development.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-783">
           <caret line="41" column="45" lean-forward="true" selection-start-line="41" selection-start-column="45" selection-end-line="41" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uwsgi.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="15" column="12" lean-forward="true" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -795,6 +777,33 @@
           <folding>
             <element signature="e#223#232#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uwsgi.pid">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uwsgi.log">
+      <provider selected="true" editor-type-id="LogFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uwsgi.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="15" column="12" lean-forward="true" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyb_web/settings/production.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1122">
+          <caret line="52" column="46" selection-start-line="52" selection-start-column="46" selection-end-line="52" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyb_web/settings/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-374">
+          <caret line="19" column="17" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="21" />
         </state>
       </provider>
     </entry>
