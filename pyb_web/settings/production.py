@@ -50,7 +50,7 @@ DATABASES = {
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/9',
+        'LOCATION': 'redis://127.0.0.1:6379/10',   # 9已经被使用
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
@@ -80,7 +80,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/home/webmaster/dailyfresh_debug/dailyfresh_debug.log',  # 日志文件存放位置
+            'filename': '/home/webmaster/pyb_web_debug/pyb_web_debug.log',  # 日志文件存放位置
         },
     # 重大错误，发送邮件给管理员
     'mail_admins': {
