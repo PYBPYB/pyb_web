@@ -73,32 +73,32 @@ ADMINS = (
 )
 
 # 日志文件
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/home/webmaster/pyb_web_debug/pyb_web_debug.log',  # 日志文件存放位置
-        },
-    # 重大错误，发送邮件给管理员
-    'mail_admins': {
-        'level': 'ERROR',
-        'class': 'django.utils.log.AdminEmailHandler',
-        }
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],  # 记录启用文件（上面的‘file’文件）
-            'level': 'DEBUG',  # 记录级别
-            'propagate': True,  # 日志记录完成之后需不需要继续向上传递
-        },
-    'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',  # 发生错误时，去发送邮件
-            'propagate': False,
-        },
-
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.FileHandler',
+#             'filename': '/home/webmaster/pyb_web_debug/pyb_web_debug.log',  # 日志文件存放位置
+#         },
+#     # 重大错误，发送邮件给管理员
+#     'mail_admins': {
+#         'level': 'ERROR',
+#         'class': 'django.utils.log.AdminEmailHandler',
+#         }
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file'],  # 记录启用文件（上面的‘file’文件）
+#             'level': 'DEBUG',  # 记录级别
+#             'propagate': True,  # 日志记录完成之后需不需要继续向上传递
+#         },
+#     'django.request': {
+#             'handlers': ['mail_admins'],
+#             'level': 'ERROR',  # 发生错误时，去发送邮件
+#             'propagate': False,
+#         },
+#
+#     },
+# }
