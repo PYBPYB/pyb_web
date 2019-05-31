@@ -1,0 +1,13 @@
+*** Starting uWSGI 2.0.18 (64bit) on [Thu May 30 20:55:17 2019] ***
+compiled with version: 7.3.0 on 28 March 2019 08:34:21
+os: Linux-4.15.0-50-generic #54-Ubuntu SMP Mon May 6 18:46:08 UTC 2019
+nodename: ubuntu
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 4
+current working directory: /home/pybzdxhsyysqzm/Django/pyb_web
+writing pidfile to uwsgi.pid
+detected binary path: /home/pybzdxhsyysqzm/.virtualenvs/pyb_web/bin/uwsgi
+chdir() to /home/admin/WORKON_HOME/pyb_web
+chdir(): No such file or directory [core/uwsgi.c line 2623]
