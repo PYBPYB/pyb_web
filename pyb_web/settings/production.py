@@ -38,7 +38,7 @@ FDFS_URL = 'http://47.100.227.176:8888/'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dailyfresh',
+        'NAME': 'pyb_web',
         'USER': 'root',
         'PASSWORD': os.environ['PASSWORD'],
         'HOST': 'localhost',
