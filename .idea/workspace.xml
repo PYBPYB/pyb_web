@@ -9,41 +9,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3daf912-4bca-459d-97bf-d1bf895b1b28" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/user/search_indexes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/base_login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/information.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/search/indexes/user/article_text.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/search/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dailyfreshTow/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../dailyfreshTow/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dailyfreshTow/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../dailyfreshTow/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dailyfreshTow/dailyfresh/settings/development.py" beforeDir="false" afterPath="$PROJECT_DIR$/../dailyfreshTow/dailyfresh/settings/development.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dailyfreshTow/dailyfresh/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../dailyfreshTow/dailyfresh/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dailyfreshTow/dump.rdb" beforeDir="false" afterPath="$PROJECT_DIR$/../dailyfreshTow/dump.rdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dailyfreshTow/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/../dailyfreshTow/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dailyfreshTow/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../dailyfreshTow/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dailyfreshTow/templates/search/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/../dailyfreshTow/templates/search/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dailyfreshTow/whoosh_index/MAIN_26ypdiykng60jjwf.seg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dailyfreshTow/whoosh_index/MAIN_rgroc9xr9pz1pkde.seg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dailyfreshTow/whoosh_index/MAIN_tyjazetkp3rqf5z8.seg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dailyfreshTow/whoosh_index/_MAIN_14.toc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/tx/default.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/public/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/public/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/public/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/public/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/user/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/user/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/user/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyb_web/settings/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyb_web/settings/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyb_web/settings/development.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyb_web/settings/development.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyb_web/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyb_web/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/blog_details.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog_details.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/blog_write.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog_write.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/fdfs/client/development_client.conf" beforeDir="false" afterPath="$PROJECT_DIR$/utils/fdfs/client/development_client.conf" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,7 +61,7 @@
         <counts>
           <entry key="conf" value="7" />
           <entry key="css" value="23" />
-          <entry key="html" value="158" />
+          <entry key="html" value="160" />
           <entry key="ico" value="3" />
           <entry key="jpeg" value="2" />
           <entry key="jpg" value="1" />
@@ -108,7 +76,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="23" />
-          <entry key="HTML" value="158" />
+          <entry key="HTML" value="160" />
           <entry key="Image" value="6" />
           <entry key="JavaScript" value="35" />
           <entry key="PLAIN_TEXT" value="9" />
@@ -126,7 +94,7 @@
           <entry key="html" value="15413" />
           <entry key="js" value="41" />
           <entry key="py" value="11839" />
-          <entry key="txt" value="107" />
+          <entry key="txt" value="116" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -134,14 +102,33 @@
           <entry key="CSS" value="67" />
           <entry key="HTML" value="15413" />
           <entry key="JavaScript" value="41" />
-          <entry key="PLAIN_TEXT" value="121" />
+          <entry key="PLAIN_TEXT" value="130" />
           <entry key="Python" value="11846" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/user.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="365">
+              <caret line="143" column="55" selection-start-line="143" selection-start-column="55" selection-end-line="143" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="51" column="22" lean-forward="true" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -154,6 +141,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Your Name &lt;you@example.com&gt;" />
+      </list>
+    </option>
     <option name="ROOT_SYNC" value="SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -208,9 +200,9 @@
         <option value="$PROJECT_DIR$/pyb_web/urls.py" />
         <option value="$PROJECT_DIR$/apps/user/views.py" />
         <option value="$PROJECT_DIR$/templates/base.html" />
-        <option value="$PROJECT_DIR$/templates/user.html" />
         <option value="$PROJECT_DIR$/utils/fdfs/client/development_client.conf" />
         <option value="$PROJECT_DIR$/pyb_web/settings/development.py" />
+        <option value="$PROJECT_DIR$/templates/user.html" />
       </list>
     </option>
   </component>
@@ -297,6 +289,11 @@
             <path>
               <item name="pyb_web" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyb_web" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyb_web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyb_web" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -326,7 +323,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///home/pybzdxhsyysqzm/Django/pyb_web/pyb_web/urls.py" />
+    <property name="SearchEverywhereHistoryKey" value="/static/img/bg.jpg&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
@@ -335,19 +332,19 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/tx" />
+      <recent name="$PROJECT_DIR$/static/wangEditor-3.1.1" />
+      <recent name="$PROJECT_DIR$/templates/search" />
+      <recent name="$PROJECT_DIR$/templates" />
+      <recent name="$PROJECT_DIR$/apps/user" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/static/js/jquery" />
       <recent name="$PROJECT_DIR$/static/css" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/apps/public" />
       <recent name="$PROJECT_DIR$/apps" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/templates/search" />
-      <recent name="$PROJECT_DIR$/templates" />
-      <recent name="$PROJECT_DIR$/apps/user" />
-      <recent name="$PROJECT_DIR$/apps" />
-      <recent name="$PROJECT_DIR$/utils/fdfs" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -373,6 +370,14 @@
       <option name="presentableId" value="Default" />
       <updated>1553064722788</updated>
     </task>
+    <task id="LOCAL-00001" summary="1.0">
+      <created>1559269914975</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1559269914975</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -386,12 +391,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1918" height="993" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24358974" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15491453" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3295207" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32896304" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -401,7 +407,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.56401384" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5008104" side_tool="true" weight="0.39700806" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49918962" visible="true" weight="0.7381228" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49918962" visible="true" weight="0.14831981" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3298731" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -415,6 +421,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="1.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.0" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/apps/user/apps.py">
@@ -610,13 +620,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/user.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3674">
-          <caret line="167" column="22" selection-start-line="167" selection-start-column="22" selection-end-line="167" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/user/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1474">
@@ -632,13 +635,6 @@
             <marker date="1558767714256" expanded="true" signature="497:499" ph="..." />
             <marker date="1558767714256" expanded="true" signature="2164:2166" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1298">
-          <caret line="59" column="61" selection-start-line="59" selection-start-column="61" selection-end-line="59" selection-end-column="70" />
         </state>
       </provider>
     </entry>
@@ -708,6 +704,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
           <caret line="121" selection-start-line="121" selection-end-line="121" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="51" column="22" lean-forward="true" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/user.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="143" column="55" selection-start-line="143" selection-start-column="55" selection-end-line="143" selection-end-column="55" />
         </state>
       </provider>
     </entry>
