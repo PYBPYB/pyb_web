@@ -23,10 +23,10 @@ unique：True表示唯一
 【EmailField】
 '''
 
+
 # 用户(User)模型
 # 采用的继承方式扩展用户信息
 class User(AbstractUser, BaseModel):
-
     avatar = models.ImageField(upload_to='static/avatar/default.png', default=None, max_length=200, blank=True,
                                null=True, verbose_name='用户头像')
     qq = models.CharField(max_length=20, blank=True, null=True, verbose_name='QQ号码')
@@ -47,7 +47,6 @@ class User(AbstractUser, BaseModel):
     # 对象的字符串表达式(unicode格式)
     def __str__(self):
         return self.username
-
 
 
 # 文章标签(tag)模型
@@ -93,7 +92,7 @@ class ArticleManager(BaseModel):
 class Article(BaseModel):
     title = models.CharField(max_length=50, verbose_name='文章标题')
     desc = models.CharField(max_length=1000, verbose_name='文章描述')
-    image = models.ImageField(upload_to='avatar/%Y/%m', default='avatar/default.png', verbose_name='封面图片')
+    image = models.ImageField(upload_to='static/avatar/fengmian.jpg', default=None, blank=True, null=True, verbose_name='封面图片')
     content = models.TextField(verbose_name='文章内容', blank=True)
     click_count = models.IntegerField(default=0, verbose_name='点击次数')
     is_recommend = models.BooleanField(default=False, verbose_name='是否推荐')
@@ -167,6 +166,3 @@ class Ad(BaseModel):
 
     def __str__(self):
         return self.title
-
-
-

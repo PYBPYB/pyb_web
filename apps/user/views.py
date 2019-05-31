@@ -1,5 +1,6 @@
 from django.urls import reverse
 from django.http import JsonResponse
+from django.conf import settings
 from django.views.generic import View
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -8,6 +9,8 @@ from apps.user.models import User, Article, Category, Tag, Comment
 import re
 
 from utils.mixin import LoginRequiredMixin
+
+
 
 
 # 个人中心
@@ -29,6 +32,14 @@ class UserView(LoginRequiredMixin, View):
         # 最新评论
         new_comments = Comment.objects.filter(user=user).order_by('-date_publish')[:10]
 
+        # 头像显示问题
+        for new_comment in new_comments:
+            comment_user = User.objects.get(username=new_comment.username)
+            if comment_user.avatar == '':
+                new_comment.avatar = '/static/tx/default.jpg'
+            else:
+                new_comment.avatar = comment_user.avatar
+
         # 获取该用户所有的文章 和 评论
         if articles_type == '0':
             articles = Article.objects.filter(user=user)
@@ -36,11 +47,18 @@ class UserView(LoginRequiredMixin, View):
             articles = Article.objects.fileter(user=user, type=articles_type)
 
         for article in articles:
+
+            # 解决封面图片问题
+            if article.image == '':
+                article.image_default = '/static/tx/fengmian.jpg'
+
+            # 获取评论数
             comment = Comment.objects.filter(article=article)
 
             # print(articles) 增加浏览次数记录在 article 中
             article.comment_count = comment.count()
             article.tags = article.tag.all()
+
 
         # todo： 进行分页
         paginator = Paginator(articles, 6)
@@ -80,16 +98,6 @@ class UserView(LoginRequiredMixin, View):
         }
 
         return render(request, 'user.html', context)
-    #
-    # def post(self, request):
-    #
-    #     # 获取用户信息
-    #     user = request.user
-    #     print(user)
-    #     if not user.is_active:
-    #         return JsonResponse({'res': 1, 'errmsg': '请先激活账号'})
-    #
-    #     return render(reverse('user:write'))
 
 
 # 登录
@@ -204,7 +212,7 @@ class UserRegisterView(View):
 
         # 进行业务处理：进行用户注册
         user = User.objects.create_user(username, email, password)
-        user.is_active = 0  # 默认绑定邮箱
+        user.is_active = 1  # 默认绑定邮箱
         user.save()
 
         # 返回应答,跳转首页
@@ -261,8 +269,9 @@ class UserWriteBlogView(LoginRequiredMixin, View):
         user = request.user
         # 获取当前文章分类对应的分类信息的实例对象
         category = Category.objects.get(name=category)
-        print('...')
+
         # 业务处理 增加一条博客信息信息
+
         blog = Article.objects.create(
             title=title,
             category=category,
@@ -270,8 +279,6 @@ class UserWriteBlogView(LoginRequiredMixin, View):
             # desc=desc,
             content=content,
             user=user,
-
-            # tag=tag,
         )
 
         # 处理标签信息

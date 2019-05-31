@@ -67,9 +67,9 @@
                                         <figure class="thumbnail">
                                             <a href="{% url 'user:details' article.id %}">
                                                 {% if article.image %}
-                                                <img src="{{ article.image.url }}"  height="300" alt="">
+                                                <img src="{{ article.image.url }}"  height="400" alt="">
                                                 {% else %}
-                                                <img src="http://47.100.227.176:8888/group1/M00/00/01/rBAJdlyN03CAcMkoAAAljIO_yW05507120"  height="300" alt="">
+                                                <img src="/static/tx/fengmian.jpg"  height="400" alt="">
                                                 {% endif %}
                                             </a>
                                         </figure>
@@ -120,7 +120,7 @@
                                 {# 文章列表 #}
                                 <li class="list-group-item">
                                     {% for hot_article in hot_articles %}
-                                    <span class="hotest-post-title"><a href="/article/vmaig_blog.html">{{ hot_article.title }}</a> </span>
+                                    <span class="hotest-post-title"><a href="{% url 'user:details' hot_article.id %}">{{ hot_article.title }}</a> </span>
                                     <span class="badge">{{ hot_article.click_count }}</span>
                                     {% endfor %}
                                 </li>
@@ -145,7 +145,7 @@
                                 {% for new_comment in new_comments %}
                                     {# 头像 #}
                                     <div class="comment-tx">
-                                        <img src="/static/tx/default.jpg" width="35" height="35" alt="">
+                                        <img src="{{ new_comment.avatar }}" width="35" height="35" alt="">
                                     </div>
                                     {# 评论体 #}
                                     <div class="comment-info">

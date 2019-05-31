@@ -18,7 +18,6 @@ class IndexView(View):
         article_tag = request.GET.get('article_tag', '0')
         page = request.GET.get('page', '1')  # 页码
 
-        print(page)
         user = request.user
 
         # 获取轮播信息
@@ -26,7 +25,6 @@ class IndexView(View):
 
         # 获取热门文章（浏览量最多的文章）
         hot_articles = Article.objects.all().order_by('-click_count')[:10]
-
 
         # 标题内容
         if article_type == '0' and article_tag == '0':
@@ -50,9 +48,15 @@ class IndexView(View):
 
 
 
-        for article in articles:
-            comment = Comment.objects.filter(article=article)
 
+        for article in articles:
+            # 解决封面图片问题
+
+            if article.image == '':
+                article.image_default = '/static/tx/fengmian.jpg'
+
+            # 获取评论次数
+            comment = Comment.objects.filter(article=article)
             # print(articles) 增加浏览次数记录在 article 中
             article.comment_count = comment.count()
             article.tags = article.tag.all()

@@ -9,9 +9,9 @@
 
 {% block body %}
 {# 文章列表与侧边栏 #}
-<div id="vmaig-main">
+
     <div id="vmaig-content" class="container">
-        <div class="container">
+        <div class="">
             {# 左边 #}
             <div id="vmaig-content" class="col-md-8 ">
                 <div class="well-lg">
@@ -46,11 +46,12 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <figure class="thumbnail">
+                                        {# 封面图片 #}
                                             <a href="{% url 'user:details' article.id %}">
                                                 {% if article.image %}
                                                     <img src="{{ article.image.url }}"  height="400" alt="">
                                                 {% else %}
-                                                    <img src="http://47.100.227.176:8888/group1/M00/00/01/rBAJdlyN03CAcMkoAAAljIO_yW05507120"  height="400" alt="">
+                                                    <img src="/static/tx/fengmian.jpg"  height="400" alt="">
                                                 {% endif %}
                                             </a>
                                         </figure>
@@ -121,7 +122,6 @@
             </div>
         </div>
     </div>
-</div>
 
 {# 分页 #}
 <nav style="text-align: center" aria-label="Page navigation">
