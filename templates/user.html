@@ -77,16 +77,16 @@
                                     <div class="col-sm-8">
                                         <p>
 
-                                        <p>{{ article.content | striptags | truncatechars:400 }}{# 内容 | 去html标签 | 最多显示字符数目 #}
+                                        <p>{{ article.content | striptags | truncatechars:260 }}{# 内容 | 去html标签 | 最多显示字符数目 #}
 
                                             ...
 
                                         </p>
 
 
-                                        <a type="button" class="btn btn-success "  href="{% url 'user:details' article.id %}">阅读全文</a>
-                                        <a type="button" class="btn btn-warning "  href="{% url 'user:details' article.id %}">修改文章</a>
-                                        <a type="button" class="btn  btn-danger "  href="{% url 'user:details' article.id %}">删除文章</a>
+                                        <a type="button" class="btn btn-success"  href="{% url 'user:details' article.id %}">阅读全文</a>
+{#                                        <a type="button" class="btn btn-warning "  href="{% url 'user:details' article.id %}">修改文章</a>#}
+{#                                        <a type="button" class="btn  btn-danger "  href="{% url 'user:details' article.id %}">删除文章</a>#}
 
                                     </div>
                                 </div>

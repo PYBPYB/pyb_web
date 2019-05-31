@@ -60,7 +60,7 @@
                                     </div>
 {#                                     文章内容介绍#}
                                     <a href="{% url 'user:details' article.object.id %}" class="col-sm-8">
-                                        {{ article.object.content | striptags | truncatechars:400 }}{# 内容 | 去html标签 | 最多显示字符数目 ...#}
+                                        {{ article.object.content | striptags | truncatechars:260 }}{# 内容 | 去html标签 | 最多显示字符数目 ...#}
                                     </a>
                                 </div>
                             </div>
