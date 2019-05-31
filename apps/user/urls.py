@@ -1,5 +1,5 @@
 from django.urls import path
-from apps.user.views import UserView, UserLoginView, UserLogoutView, UserRegisterView, UserWriteBlogView, UserDetailsView
+from apps.user.views import UserView, UserLoginView, UserLogoutView, UserRegisterView, UserWriteBlogView, UserDetailsView, UserInformationView
 
 urlpatterns = [
     path('login', UserLoginView.as_view(), name='login'),  # 登录
@@ -7,7 +7,8 @@ urlpatterns = [
     path('logout', UserLogoutView.as_view(), name='logout'),  # 退出账号
 
     path('write', UserWriteBlogView.as_view(), name='write'),  # 写博客
-    path('details/<article_id>', UserDetailsView.as_view(), name='details'),  # 博客性情页面
+    path('details/<article_id>', UserDetailsView.as_view(), name='details'),  # 博客详情页面
 
-    path('center/<articles_type>/<page>', UserView.as_view(), name='center'),  # 用户中心
+    path('information', UserInformationView.as_view(), name='information'),  # 个人信息
+    path('center', UserView.as_view(), name='center'),  # 用户中心
 ]

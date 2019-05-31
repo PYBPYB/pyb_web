@@ -5,22 +5,50 @@ from django.core.paginator import Paginator
 
 from django.core.cache import cache
 
-from apps.public.models import Image
-from apps.user.models import Article, Comment
+from apps.public.models import Image, IndexCarousel
+from apps.user.models import Article, Comment, Category, Tag
 
 
 # 主页
 class IndexView(View):
 
-    def get(self, request, page=1, article_type='0'):
+    def get(self, request):
 
+        article_type = request.GET.get('article_type', '0')  # 文章类型
+        article_tag = request.GET.get('article_tag', '0')
+        page = request.GET.get('page', '1')  # 页码
+
+        print(page)
         user = request.user
 
-        # 获取所有的文章信息
-        if article_type == '0':
+        # 获取轮播信息
+        carousels = IndexCarousel.objects.all()
+
+        # 获取热门文章（浏览量最多的文章）
+        hot_articles = Article.objects.all().order_by('-click_count')[:10]
+
+
+        # 标题内容
+        if article_type == '0' and article_tag == '0':
             articles = Article.objects.all()
-        else:
+            top_title = '全部文章'
+
+        elif article_type != '0':
             articles = Article.objects.filter(category=article_type)
+            # 分类信息
+            category = Category.objects.get(id=article_type)
+            top_title = '%s类型的所有文章' % category.name
+
+        elif article_tag != '0':
+            articles = Article.objects.filter(tag=article_tag)
+            # 获取当前标签信息
+            tag = Tag.objects.get(id=article_tag)
+            top_title = '%s标签的所有文章' % tag.name
+        else:
+            articles = Article.objects.all()
+            top_title = '全部文章'
+
+
 
         for article in articles:
             comment = Comment.objects.filter(article=article)
@@ -58,9 +86,13 @@ class IndexView(View):
         else:
             pages = range(page - 2, page + 3)
 
+
+
         context = {
             'user': user,
-            # 'articles': articles,
+            'top_title': top_title,  # 标题写什么
+            'carousels': carousels,  # 轮播暂时没用
+            'hot_articles': hot_articles,  # 热门文章
             'articles_page': articles_page,  # 该分页商品
             'pages': pages,  # 分页格式
         }
@@ -103,23 +135,7 @@ class InputImageView(View):
         return JsonResponse({"errno": 0, "data": [image_str, ]})
 
 
-# 新的评论
-class InputCommentView(View):
-
-    def post(self, request):
-        # 接受参数
-        content = request.POST.get('content')
-        article_user_id = request.POST.get('article_user_id')
-        article_id = request.POST.get('article_id')
-        pid = request.POST.get('pid')
-
-        # 数据校验
-
-        # 业务处理
-
-        # 返回应答
-        pass
-
+# 分类信息页面和标签搜索结果页面
 
 
 

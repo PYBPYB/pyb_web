@@ -1,0 +1,9 @@
+# 指定根据表中的哪些数据建立索引
+
+{{ object.title }}  # 根据文章名称类建立索引
+{{ object.content }}  # 根据文章内容建立索引
+{{ object.category }}  # 根据分类建立索引
+
+#{{ object.user.username }}  # 根据文章的创作者建立索引
+#{{ object.tag.name }}  # 根据标签建立索引
+

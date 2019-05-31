@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{#{% load highlight %}#}
+
+
+{% block title %}搜索结果页{% endblock title %}
+
+{# 导航框内容显示 #}
+{% block hander_banner_title %}搜索结果{% endblock hander_banner_title %}
+{% block hander_banner_desc %}搜索的关键字：{{ query }}{% endblock hander_banner_desc %}
+{#{% block hander_banner_email %}总共{{  }}个结果{% endblock hander_banner_email %}#}
+
+{% block body %}
+
+
+{# 文章搜索结果列表#}
+<div id="vmaig-main">
+    <div id="vmaig-content" class="container">
+        <div class="container">
+{#             左边#}
+            <div id="vmaig-content" class=" ">
+                <div class="well-lg">
+                    <div id="all-post-list">
+{#                         文章列表#}
+                        {% for article in page.object_list %}
+                        <div class="all-post clearfix underline">
+                            <div class="post-title clearfix">
+                                <a href="/category/django/">
+                                    <div class="pre-cat">
+                                        <div class="pre-catinner btn">
+                                            {{ article.object.category }}
+                                        </div>
+                                        <div class="pre-catarrow">
+                                        </div>
+                                    </div>
+                                </a>
+{#                                 文章标题#}
+                                <h1><a href="{% url 'user:details' article.object.id %}">{{ article.object.title }}</a></h1>
+
+                                <div class="post-tags" style="float:right">
+                                    {% for tag in article.object.tags %}  {# 文章标签
+                                    <a href="/">
+                                        <span class="label label-vmaig-{{ forloop.counter  }} btn">{{ tag }}</span>
+                                    </a>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                            <div class="post-content ">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <figure class="thumbnail">
+                                            <a href="{% url 'user:details' article.object.id %}">
+                                                {% if article.object.image %}
+                                                    <img src="{{ article.object.image.url }}"  height="400" alt="">
+                                                {% else %}
+                                                    <img src="http://47.100.227.176:8888/group1/M00/00/01/rBAJdlyN03CAcMkoAAAljIO_yW05507120"  height="400" alt="">
+                                                {% endif %}
+                                            </a>
+                                        </figure>
+                                    </div>
+{#                                     文章内容介绍#}
+                                    <a href="{% url 'user:details' article.object.id %}" class="col-sm-8">
+                                        {{ article.object.content | striptags | truncatechars:400 }}{# 内容 | 去html标签 | 最多显示字符数目 ...#}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="post-info">
+                                <span>
+                                    <a href="#" class="glyphicon glyphicon-user">{{ article.object.user.username }}&nbsp;&nbsp;&nbsp;</a>
+                                </span>
+                                <span>
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                    {{ article.object.date_publish }}
+                                </span>
+                                <span>
+                                    <span class="glyphicon glyphicon-comment"></span>
+                                    {{ article.object.comment_count }}
+                                </span>
+                                <span>
+                                    <span class="glyphicon glyphicon-eye-open"></span>
+                                    {{ article.object.click_count }}
+                                </span>
+                            </div>
+                        </div>
+                        {% empty %}
+                            <div class="no-post">没有搜索到你想要的结果！</div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+{# 分页#}
+<nav style="text-align: center" aria-label="Page navigation">
+        <ul class="pagination pagination-lg">
+            {% if page.has_previous %}
+            <li>
+            <a href="/search?q={{ query }}&page={{ page.previous_page_number }}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            </a>
+            </li>
+            {% endif %}
+		{% for pindex in paginator.page_range %}
+			{% if pindex == page.number %}
+                    <li class="active">
+                      <span>{{ pindex }}<span class="sr-only">(current)</span></span>
+                    </li>
+                {% else %}
+                    <li><a href="/search?q={{ query }}&page={{ pindex }}">{{ pindex }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page.has_next %}
+            <li>
+            <a href="/search?q={{ query }}&page={{ page.next_page_number }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+
+{% endblock body %}

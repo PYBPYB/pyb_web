@@ -1,37 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}主页{% endblock title %}
+{% block title %}{{ top_title  }}{% endblock title %}
+
+{# 导航框内容显示 #}
+{% block hander_banner_title %}{{ top_title  }}{% endblock hander_banner_title %}
+
 
 {% block body %}
-{# 滚动展示 #}
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner" role="listbox">
-          <div class="item active">
-            <img data-src="holder.js/1140x500/auto/#777:#555/text:First slide" alt="First slide">
-          </div>
-          <div class="item">
-            <img data-src="holder.js/1140x500/auto/#666:#444/text:Second slide" alt="Second slide">
-          </div>
-          <div class="item">
-            <img data-src="holder.js/1140x500/auto/#555:#333/text:Third slide" alt="Third slide">
-          </div>
-        </div>
-        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-
 {# 文章列表与侧边栏 #}
 <div id="vmaig-main">
     <div id="vmaig-content" class="container">
@@ -44,7 +20,8 @@
                         {% for article in articles_page %}
                         <div class="all-post clearfix underline">
                             <div class="post-title clearfix">
-                                <a href="/category/django/">
+                                {# 文章类型 #}
+                                <a href="{% url 'public:index' %}?article_type={{ article.category.id }} ">
                                     <div class="pre-cat">
                                         <div class="pre-catinner btn">
                                             {{ article.category }}
@@ -53,12 +30,13 @@
                                         </div>
                                     </div>
                                 </a>
+                                {# 文章标题 #}
                                 <h1><a href="{% url 'user:details' article.id %}">{{ article.title }}</a></h1>
 
                                 <div class="post-tags" style="float:right">
-                                    {% for tag in article.tags %}
-                                    <a href="/tag/django/">
-                                        <span class="label label-vmaig-{{ forloop.counter  }} btn">django</span>
+                                    {% for tag in article.tags %}  {# 文章标签 #}
+                                    <a href="{% url 'public:index' %}?article_tag={{ tag.id }}">
+                                        <span class="label label-vmaig-{{ forloop.counter  }} btn">{{ tag }}</span>
                                     </a>
                                     {% endfor %}
 
@@ -77,19 +55,23 @@
                                             </a>
                                         </figure>
                                     </div>
-                                    <div class="col-sm-8">
-                                        {{ article.desc }}
+                                    {# 文章内容介绍 #}
+                                    <div  class="col-sm-8">
+                                        {{ article.content | striptags | truncatechars:300 }}{# 内容 | 去html标签 | 最多显示字符数目 #}...
                                     </div>
                                 </div>
                             </div>
                             <div class="post-info">
+                                <span>
+                                    <a href="#" class="glyphicon glyphicon-user">{{ article.user.username }}&nbsp;&nbsp;&nbsp;</a>
+                                </span>
                                 <span>
                                     <span class="glyphicon glyphicon-calendar"></span>
                                     {{ article.date_publish }}
                                 </span>
                                 <span>
                                     <span class="glyphicon glyphicon-comment"></span>
-                                    未完成
+                                    {{ article.comment_count }}
                                 </span>
                                 <span>
                                     <span class="glyphicon glyphicon-eye-open"></span>
@@ -105,10 +87,7 @@
             {# 右边 #}
             <div id="vmaig-side" class="col-md-4">
 
-                {# 新建 #}
-                <div >
 
-                </div>
 
                 {# 侧边工具栏 #}
                 <div id="vmaig-auth-login">
@@ -120,53 +99,25 @@
                                 热门文章
                             </h3>
                         </div>
+
                         <ul id="hotest-post-list" class="list-group collapse in">
+
                                 {# 文章列表 #}
-                                <li class="list-group-item">
-                                <span class="hotest-post-title"><a href="/article/vmaig_blog.html">本网站开源喽~~基于Django，Bootstrap</a> </span>
-                                <span class="badge">13924</span>
-                                </li>
+                                {% for hot_article in hot_articles %}
+                                    <li class="list-group-item">
+                                    <span class="hotest-post-title"><a href="{% url 'user:details' hot_article.id %}">{{ hot_article.title }}</a> </span>
+                                    <span class="badge">{{ hot_article.click_count }}</span>
+                                    </li>
+                                {% endfor %}
+
                         </ul>
+
                     </div>
                 </div>
 
                 {# 显示评论模块 #}
-                <div id="vmaig-latest-comments">
-                    <div class="panel ">
-                        {# 评论模块的头 #}
-                        <div class="panel-body">
-                            <h3 class="panel-title">
-                                <span class="glyphicon glyphicon-comment"></span>
-                                最新评论
-                            </h3>
-                        </div>
-                        {# 评论内容的列表 #}
-                        <ul id="latest-comment-list" class="list-group collapse in">
-
-                            <li class="list-group-item clearfix">
-                            {# 头像 #}
-                            <div class="comment-tx">
-                                <img src="/static/tx/default.jpg" width="40" height="40" alt="">
-                            </div>
-                            {# 评论体 #}
-                            <div class="comment-info">
-                                <div class="comment-username">
-                                    <a href="#">nik 评论:</a>
-                                </div>
-                                <div class="comment-content">
-                                    <a href="/article/PE_study_01.html">
-
-                                        henhao
 
 
-                                    </a>
-                                </div>
-                            </div>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

@@ -12,9 +12,23 @@ from utils.mixin import LoginRequiredMixin
 
 # 个人中心
 class UserView(LoginRequiredMixin, View):
+
     # 文章类型（莫认为0，表示所有类型） 文章访问页码
-    def get(self, request, articles_type, page):
+    def get(self, request):
+
+        articles_type = request.GET.get('article_type', '0')
+        page = request.GET.get('page', '1')
+
         user = request.user
+
+        # 处理
+
+        # 获取该用户热门文章（浏览量最多的文章）
+        hot_articles = Article.objects.filter(user=user).order_by('-click_count')[:10]
+
+        # 最新评论
+        new_comments = Comment.objects.filter(user=user).order_by('-date_publish')[:10]
+
         # 获取该用户所有的文章 和 评论
         if articles_type == '0':
             articles = Article.objects.filter(user=user)
@@ -59,12 +73,23 @@ class UserView(LoginRequiredMixin, View):
 
         context = {
             'user': user,
-            # 'articles': articles,
+            'hot_articles': hot_articles,  # 热门文章
+            'new_comments': new_comments,  # 热门评论
             'articles_page': articles_page,  # 该分页商品
             'pages': pages,  # 分页格式
         }
 
         return render(request, 'user.html', context)
+    #
+    # def post(self, request):
+    #
+    #     # 获取用户信息
+    #     user = request.user
+    #     print(user)
+    #     if not user.is_active:
+    #         return JsonResponse({'res': 1, 'errmsg': '请先激活账号'})
+    #
+    #     return render(reverse('user:write'))
 
 
 # 登录
@@ -92,15 +117,6 @@ class UserLoginView(View):
         if not all([username, password]):
             return render(request, 'login.html', {'errmsg': '数据不完整'})
 
-        # 业务处理：登录校验
-        # try:
-        #     user1 = User.objects.get(username=username)
-        #     print(user1)
-        #     user2 = User.objects.get(password=password)
-        #     print(user2)
-        # except:
-        #     pass
-
         user = authenticate(username=username, password=password)
         # print('------------------', user, '------------------')
 
@@ -119,7 +135,7 @@ class UserLoginView(View):
             # 判断是否需要记住用户名
             remember = request.POST.get('remember')
 
-            if remember == 'on':
+            if remember == 'remember-me':
                 # 记住用户名
                 response.set_cookie('username', username, max_age=7*24*3600)
             else:
@@ -128,7 +144,7 @@ class UserLoginView(View):
             return response
         else:
             #  用户名或密码错误
-            print(username, '---', password, '---', user)
+            # print(username, '---', password, '---', user)
             return render(request, 'login.html', {'errmsg': '用户名或密码错误'})
 
 
@@ -175,7 +191,7 @@ class UserRegisterView(View):
 
         # 校验邮箱是否已经被注册
         try:
-            user = User.objects.get(email=email)
+            user = User.objects.filter(email=email)
         except User.DoesNotExist:
             # 邮箱不存在
             user = None
@@ -186,13 +202,11 @@ class UserRegisterView(View):
                           {'errmsg': '该邮箱已被注册'})
 
 
-        # print('到了这马？1')
         # 进行业务处理：进行用户注册
         user = User.objects.create_user(username, email, password)
         user.is_active = 0  # 默认绑定邮箱
         user.save()
 
-        # print('到了这马？2')
         # 返回应答,跳转首页
         return redirect(reverse('public:index'))  # 反向解析，需要目标设置的自己的 name属性
 
@@ -202,6 +216,9 @@ class UserWriteBlogView(LoginRequiredMixin, View):
 
     #
     def get(self, request):
+
+        # 判断用户身份
+        user = request.user
 
         # 获取所有的文章分类信息
         categorys = Category.objects.all()
@@ -234,7 +251,7 @@ class UserWriteBlogView(LoginRequiredMixin, View):
         category = request.POST.get('category')
         image = request.FILES.get('image')
         tag = request.POST.get('tag')
-        desc = request.POST.get('desc')
+        # desc = request.POST.get('desc')   # 不需要了
         content = request.POST.get('content')
 
         # 校验数据
@@ -244,13 +261,13 @@ class UserWriteBlogView(LoginRequiredMixin, View):
         user = request.user
         # 获取当前文章分类对应的分类信息的实例对象
         category = Category.objects.get(name=category)
-
+        print('...')
         # 业务处理 增加一条博客信息信息
         blog = Article.objects.create(
             title=title,
             category=category,
             image=image,
-            desc=desc,
+            # desc=desc,
             content=content,
             user=user,
 
@@ -285,13 +302,16 @@ class UserDetailsView(View):
         id = article_id
 
         # 数据校验
-
-
+        # print('---------------------------------->')
         # 业务处理
 
+        article = Article.objects.get(id=id)  # 获取文章信息
 
-        article = Article.objects.get(id=id)
+        comments = Comment.objects.filter(article=article).order_by('-date_publish')  # 获取所有评论信息
 
+        article.tags = article.tag.all()
+
+        # 需要判断，才能增加浏览数目
         article.click_count += 1
 
         article.save()
@@ -299,10 +319,108 @@ class UserDetailsView(View):
 
         context = {
             'article': article,
+            'comments': comments,
         }
 
         return render(request, 'blog_details.html', context)
 
+    def post(self, request, article_id):
+
+        # 接受参数
+        user = request.user  # 当前登录用户
+
+        content = request.POST.get('content')
+        article_user_id = request.POST.get('article_user_id')
+        article_id = article_id
+
+        # 数据校验
+        if not user.is_authenticated:
+            # 用户未登录
+            return JsonResponse({'res': 1, 'errmsg': '请先登录'})
+
+        if not user.is_active:
+            # 用户没有激活账户
+            return JsonResponse({'res': 2, 'errmsg': '请先激活账户'})
+
+        article_user = User.objects.get(id=article_user_id)
+        article = Article.objects.get(id=article_id)
+
+        # 业务处理
+        comment = Comment.objects.create(
+            content=content,
+            username=user.username,
+            email=user.email,
+
+            user=article_user,
+            article=article,
+            pid=0,
+        )
+
+        comment.save()
+
+        # 返回应答
+        return JsonResponse({'res': 0})
+
+
+# 个人信息修改页面
+class UserInformationView(LoginRequiredMixin, View):
+
+    # 显示个人信息修改页面
+    def get(self, request):
+
+        user = request.user
+
+        context = {
+            'user': user,
+        }
+
+        return render(request, 'information.html', context)
+
+    # 提交信息修改
+    def post(self, request):
+
+        # 接受数据
+
+        user = request.user
+
+        username = request.POST.get('username')
+        avatar = request.POST.get('avatar')
+        qq = request.POST.get('qq')
+        weixin = request.POST.get('weixin')
+        mobile = request.POST.get('mobile')
+        url = request.POST.get('avatar')
+        creed = request.POST.get('creed')
+
+        # 数据校验
+
+        # 业务处理
+        if user.username != username:
+            user.username = username
+
+        if user.avatar != avatar:
+            user.avatar = avatar
+
+        if user.qq != qq:
+            user.qq = qq
+
+        if user.weixin != weixin:
+            user.weixin = weixin
+
+        if user.mobile != mobile:
+            user.mobile = mobile
+
+        if user.url != url:
+            user.url = url
+
+        if user.creed != creed:
+            user.creed = creed
+
+
+        user.save()
+
+
+        # 返回应答
+        return render(request, 'information.html')
 
 
 

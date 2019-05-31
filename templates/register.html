@@ -1,9 +1,13 @@
-{% extends 'base.html' %}
+{% extends 'base_login.html' %}
 {% load static %}
 
 {% block title %}注册页面{% endblock title %}
 
 {% block body %}
+
+{% block header_banner %}
+{% endblock header_banner %}
+
 <div class="modal-dialog">
     <div class="modal-content">
 {#                <div class="modal-body">#}
@@ -41,5 +45,6 @@
         </div>
     </div>admin.site.register(Goods, GoodsAdmin)
 </div>
-
+{% block footer %}
+{% endblock footer %}
 {% endblock body %}

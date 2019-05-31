@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}个人信息页{% endblock title %}
+{# 用户中心 头 #}
+{% block hander_banner_title %}{{ user.username }}的用户信息{% endblock hander_banner_title %}
+{% block hander_banner_desc %}{{ user.creed }}{% endblock hander_banner_desc %}
+{% block hander_banner_email %}{{ user.email }}{% endblock hander_banner_email %}
+
+{% block body %}
+
+<div  class="container theme-showcase " role="main">
+    <div class="jumbotron well home-post ">
+
+        <form  href="" class="form-horizontal csrfmiddlewaretoken" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            {# 名称 username #}
+            <div class="form-group">
+                <label for="inputPassword" class="col-sm-2 control-label">个人名称</label>
+                <div class="col-sm-10">
+                    <input name="username" type="text" class="form-control" id="inputname" value="{{ user.username }}">
+                </div>
+            </div>
+
+            {# 用户头像 avatar #}
+            <div class="form-group">
+                <label for="inputPassword" class="col-sm-2 control-label">用户头像</label>
+                <div class="col-sm-10">
+                    <input id ="avatar" name="input-avatar" type="file">
+                </div>
+            </div>
+
+            {# 手机号码 mobile #}
+            <div class="form-group">
+                <label for="inputPassword" class="col-sm-2 control-label">手机号码</label>
+                <div class="col-sm-10">
+                    <input name="mobile" type="text" class="form-control" id="inputmobile" value="{{ user.mobile }}">
+                </div>
+            </div>
+
+            {# QQ号码 qq #}
+            <div class="form-group">
+                <label for="inputPassword" class="col-sm-2 control-label">QQ号码</label>
+                <div class="col-sm-10">
+                    <input name="qq" type="text" class="form-control" id="inputqq" value="{{ user.qq }}">
+                </div>
+            </div>
+
+            {# 微信 weixin #}
+            <div class="form-group">
+                <label for="inputPassword" class="col-sm-2 control-label">微信账号</label>
+                <div class="col-sm-10">
+                    <input name="weixin" type="text" class="form-control" id="inputweixin"  value="{{ user.weixin }}">
+                </div>
+            </div>
+
+            {# 个人网页地址 url #}
+            <div class="form-group">
+                <label for="inputPassword" class="col-sm-2 control-label">个人网站</label>
+                <div class="col-sm-10">
+                    <input name="url" type="url" class="form-control" id="inputurl"  value="{{ user.url }}">
+                </div>
+            </div>
+
+            {# 个性签名 creed #}
+            <div class="form-group">
+                <label for="inputPassword" class="col-sm-2 control-label">个性签名</label>
+                <div class="col-sm-10">
+                    <input name="creed" type="text" class="form-control" id="inputcreed"  value="{{ user.creed }}">
+                </div>
+            </div>
+
+
+            {# 更新信息按钮  #}
+            <div  class="">
+                <input type="submit" name="input" class="btn btn-primary btn-block " id="btn_input" value="更新个人信息">
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+{% endblock body %}
+
+{#网页底部引入文件块#}
+{% block bottomfiles %}
+
+{% endblock bottomfiles %}
+

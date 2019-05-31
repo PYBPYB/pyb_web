@@ -20,7 +20,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('tinymce', include('tinymce.urls')),  # 富文本编辑器
+    # path('tinymce', include('tinymce.urls')),  # 富文本编辑器
+    path('search', include('haystack.urls'), name='haystack_search'),  # 全文检索框架
     path('user/', include(('apps.user.urls', 'apps'), namespace='user')),  # 用户模块
     path('', include(('apps.public.urls', 'apps'), namespace='public')),  # 主页模块
 

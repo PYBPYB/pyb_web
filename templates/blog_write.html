@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}写博客的页面{% endblock title %}
 
+{# 介绍 #}
+{% block hander_banner_title %}在这里写下你的想法{% endblock hander_banner_title %}
+
 {% block body %}
 {# 写博客 #}
 <div  class="container theme-showcase" role="main">
@@ -49,13 +52,13 @@
             </div>
 
             {# 输入文章描述信息 desc #}
-            <div class="form-group">
-                <label for="inputPassword" class="col-sm-2 control-label">描述信息</label>
-                <div class="col-sm-10">
-                    <textarea name="desc" type="text" class="form-control" id="inputdesc" placeholder="可以从主体内容截取最具有代表性的文字片段哦">
-                    </textarea>
-                </div>
-            </div>
+{#            <div class="form-group">#}
+{#                <label for="inputPassword" class="col-sm-2 control-label">描述信息</label>#}
+{#                <div class="col-sm-10">#}
+{#                    <textarea name="desc" type="text" class="form-control" id="inputdesc" placeholder="可以从主体内容截取最具有代表性的文字片段哦">#}
+{#                    </textarea>#}
+{#                </div>#}
+{#            </div>#}
 
             {# 文章内容主体 content 富文本输入框 #}
             <div class="form-group">
@@ -64,7 +67,7 @@
 
                 <div style="padding: 5px 0; color: #ccc"></div>
 
-                <div id="div2" style="border: 1px solid #ccc;height: 800px;" class='text min-height'> <!--可使用 min-height 实现编辑区域自动增加高度-->
+                <div id="div2" style="border: 1px solid #ccc;height: 600px;" class='text min-height'> <!--可使用 min-height 实现编辑区域自动增加高度-->
                     <p>在这里输入主要内容</p>
                 </div>
             </div>
@@ -136,7 +139,7 @@
         category = $("#category_input option:selected").text()  // category:文章分类
         image = $('#input-image')[0].files[0]// iamge:封面图片对象
         tag = $('input[name="tag"]').val()  // tag:文章标签
-        desc = $('input[name="desc"]').val() // desc:描述信息
+        {#desc = $('input[name="desc"]').val() // desc:描述信息#}
         content = editor.txt.html()  // content:内容
 
 
@@ -148,10 +151,6 @@
         else if (tag == ''){
             alert('没有指明文章标签')
             return false
-        }
-        else if (desc == ''){
-            alert('没有类型')
-            return false {# 不跳转页面 #}
         }
         else if (content == '<p></p><p><br></p>'){
             alert('文章内容为空')
@@ -165,7 +164,7 @@
             params.append('category', category)
             params.append('image', image)
             params.append('tag', tag)
-            params.append('desc', desc)
+            {#params.append('desc', desc)#}
             params.append('csrfmiddlewaretoken', csrf)
             params.append('content', content)
 

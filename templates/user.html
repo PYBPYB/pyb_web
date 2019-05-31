@@ -1,15 +1,13 @@
 {% extends 'base.html' %}
 {% block title %}个人中心{% endblock title %}
 
+{% block hander_banner_title %}{{ user.username }}{% endblock hander_banner_title %}
+{% block hander_banner_desc %}{{ user.creed }}{% endblock hander_banner_desc %}
+{% block hander_banner_email %}{{ user.email }}{% endblock hander_banner_email %}
+
+
 {% block body %}
 {# 用户中心 头 #}
-<div class="modal-header">
-    <div class="container">
-        <h1>{{ user.username }}</h1>
-{#        <p>只为原创，发表<span class="hidden-xs">个人原创</span>高质量的技术博客</p>#}
-{#         <p>杨仕航的博客</p>#}
-    </div>
-</div>
 
     {# 文章兰 与 侧边栏 #}
     <div id="vmaig-content" class="container">
@@ -22,7 +20,7 @@
                         {% for article in articles_page %}
                         <div class="home-post  clearfix">
                             <div class="post-title underline clearfix">
-                                <a href="/category/django/">
+                                <a href="/search">
                                     <div class="pre-cat">
                                         <div class="pre-catinner btn">
                                             {{ article.category }}{# 文章类型 #}
@@ -51,7 +49,7 @@
                                     <div class="post-tags">
                                         {% for tag in article.tags %}
                                         <a href="{% url 'public:index' %}" class=" ">
-                                            <span class="label label-vmaig-{{ forloop.counter }}{# 记录迭代次数 #} btn">{{ tag.name }}</span>
+                                            <span class="label label-vmaig-{{ forloop.counter }}{# 记录迭代次数 #} btn">{{ tag }}</span>
                                         </a>
                                         {% endfor %}
 
@@ -79,12 +77,16 @@
                                     <div class="col-sm-8">
                                         <p>
 
-                                        <p>{{ article.desc }}
+                                        <p>{{ article.content | striptags | truncatechars:400 }}{# 内容 | 去html标签 | 最多显示字符数目 #}
 
                                             ...
 
                                         </p>
-                                        <a type="button" class="btn btn-vmaig pull-right hidden-xs"  href="{% url 'user:details' article.id %}">阅读全文</a>
+
+
+                                        <a type="button" class="btn btn-success "  href="{% url 'user:details' article.id %}">阅读全文</a>
+                                        <a type="button" class="btn btn-warning "  href="{% url 'user:details' article.id %}">修改文章</a>
+                                        <a type="button" class="btn  btn-danger "  href="{% url 'user:details' article.id %}">删除文章</a>
 
                                     </div>
                                 </div>
@@ -98,10 +100,11 @@
             {# 右边 #}
             <div id="vmaig-side" class="col-md-4">
 
-                {# 写文章按钮 #}
+                {# 写文章按钮 (需要当前登录用户是本文作者时，才会加载按钮) #}
                 <div class="home-block">
-                    <a class=" btn btn-info btn-lg btn-block" href="{% url 'user:write' %}" role="button">新建文章</a>
+                    <a name="input_write" class=" btn btn-info btn-lg btn-block" href="{% url 'user:write' %}" role="button">新建文章</a>
                 </div>
+
                 {# 侧边工具栏 #}
                 <div id="vmaig-auth-login">
                     <div class="panel panel">
@@ -116,8 +119,10 @@
                         <ul id="hotest-post-list" class="list-group collapse in">
                                 {# 文章列表 #}
                                 <li class="list-group-item">
-                                <span class="hotest-post-title"><a href="/article/vmaig_blog.html">本网站开源喽~~基于Django，Bootstrap</a> </span>
-                                <span class="badge">13924</span>
+                                    {% for hot_article in hot_articles %}
+                                    <span class="hotest-post-title"><a href="/article/vmaig_blog.html">{{ hot_article.title }}</a> </span>
+                                    <span class="badge">{{ hot_article.click_count }}</span>
+                                    {% endfor %}
                                 </li>
                         </ul>
                     </div>
@@ -137,24 +142,25 @@
                         <ul id="latest-comment-list" class="list-group collapse in">
 
                             <li class="list-group-item clearfix">
-                            {# 头像 #}
-                            <div class="comment-tx">
-                                <img src="/static/tx/default.jpg" width="40" height="40" alt="">
-                            </div>
-                            {# 评论体 #}
-                            <div class="comment-info">
-                                <div class="comment-username">
-                                    <a href="#">nik 评论:</a>
-                                </div>
-                                <div class="comment-content">
-                                    <a href="/article/PE_study_01.html">
+                                {% for new_comment in new_comments %}
+                                    {# 头像 #}
+                                    <div class="comment-tx">
+                                        <img src="/static/tx/default.jpg" width="40" height="40" alt="">
+                                    </div>
+                                    {# 评论体 #}
+                                    <div class="comment-info">
+                                        <div class="comment-username">
+                                            <a href="#">{{ new_comment.username }} </a> 的评论:
+                                        </div>
+                                        <div class="comment-content">
+                                            <a href="{% url 'user:details' new_comment.article.id %}">
 
-                                        henhao
+                                                {{ new_comment.content | striptags }}
 
-
-                                    </a>
-                                </div>
-                            </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
                             </li>
 
                         </ul>
@@ -169,7 +175,7 @@
         <ul class="pagination pagination-lg">
             {% if articles_page.has_previous %}
             <li>
-            <a href="{% url 'user:center' 0 articles_page.previous_page_number %}" aria-label="Previous">
+            <a href="{% url 'user:center' %}?article_type=0&page=articles_page.previous_page_number" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
             </a>
             </li>
@@ -181,13 +187,13 @@
                       <span>{{ page }}<span class="sr-only">(current)</span></span>
                     </li>
                 {% else %}
-                    <li><a href="{% url 'user:center' 0 page %}">{{ page }}</a></li>
+                    <li><a href="{% url 'user:center'%}?article_type=0&page={{ page }}">{{ page }}</a></li>
                 {% endif %}
             {% endfor %}
 
             {% if articles_page.has_next %}
             <li>
-            <a href="{% url 'user:center' 0 articles_page.next_page_number %}" aria-label="Next">
+            <a href="{% url 'user:center'%}?article_type=0&page=articles_page.next_page_number" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
             </a>
             </li>
@@ -195,8 +201,27 @@
         </ul>
     </nav>
 
-
 {% endblock body %}
+
+{#网页底部引入文件块#}
+{% block bottomfiles %}
+    <script type="text/javascript">
+        {# 新建博客按钮 #}
+        $("a[name='input_write']").click(function () {
+            {#alert('成功了马')#}
+
+            $.post('/user/center', function (data) {
+                if (data.res == 0){
+                    // 成功了，则跳转到写博客的页面
+                }
+                else {
+                    // 失败打印出失败的信息
+                    alert(data.errmsg)
+                }
+            })
+        })
+    </script>
+{% endblock bottomfiles %}
 
 
 

@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
+
+{# 介绍 #}
+{% block hander_banner_title %}文章详情页面{% endblock hander_banner_title %}
+
 {% block body %}
+
 {# 文章模块 #}
 <div  class="container jumbotron">
     <div id="article-page" class="">
         {# 顶栏导航栏 #}
         <ol class="breadcrumb">
-            <li><a href="{% url 'user:center' 0 1 %}"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li><a href="{% url 'user:center'%}?"><span class="glyphicon glyphicon-home"></span></a></li>
             <li><a href="/category/PE/">PE</a></li>
             <li class="hidden-xs"><a><span class="glyphicon glyphicon-calendar"></span> {{ article.data_publish }}</a></li>
             <li><a>
@@ -25,22 +30,14 @@
             <div class="article-title" name="article-id" article_id="{{ article.id }}" >
                 <h1>{{ article.title }}</h1>
             </div>
-            {# 标签 还有问题 #}
-{#            <div class="article-tags">#}
-{##}
-{#                <a href="/tag/PE/">#}
-{#                    <span class="label label-vmaig-1 btn">PE</span>#}
-{#                </a>#}
-{##}
-{#                <a href="/tag/%E9%80%86%E5%90%91/">#}
-{#                    <span class="label label-vmaig-2 btn">逆向</span>#}
-{#                </a>#}
-{##}
-{#                <a href="/tag/%E5%8F%8D%E6%B1%87%E7%BC%96/">#}
-{#                    <span class="label label-vmaig-3 btn">反汇编</span>#}
-{#                </a>#}
-{##}
-{#            </div>#}
+{#            标签 还有问题#}
+            <div class="article-tags">
+                {% for tag in article.tags %}
+                <a href="/tag/PE/">
+                    <span class="label label-vmaig-1 btn">{{ tag.name }}</span>
+                </a>
+                {% endfor %}
+            </div>
         </div>
         <hr/>{# 分行线 #}
 
@@ -52,104 +49,54 @@
     <div>
     </div>
 </div>
+{# 新建评论 #}
+<form class="container jumbotron csrfmiddlewaretoken">
+        {% csrf_token %}
+        <div id="div1" class="well-sm" >
+        </div>
+        <input type="button" name="input" class="btn btn-primary btn-block " id="btn_input" value="提交我的评论">
+    </form>
 
 {# 评论显示 #}
-<div class="panel panel-default">
-        <div class="panel-heading">
-            <h4>评论列表</h4>
-            <button id="jump_to_comment" class="btn btn-info comment_title_btn">我要评论</button>
-        </div>
-
-        <div id="comments_list" class="panel-body">
-
-
-                <div class="comment_obj" name="F340">
-                    <div class="comment_user">
-                        <img class="user_avatar" src="/static/media/avatar/447_64_3.jpg" alt="77">
-                        <p class="uesr_name">77</p>
-                    </div>
-
-                    <div class="comment_body">
-                        <div class="comment_content">
-                            <p id="comment_340">支持一下😀</p>
-                        </div>
-
-                        <p class="comment_bottom">
-                            <span>2019-01-23 10:19</span>
-                            <span class='reply_button'>
-                                <a href='javascript:void(0);' onclick='reply_click(this);' root='340' role='340' base='77'>回复</a>
-                            </span>
-                        </p>
-
-
-                        <ul class="comment_reply">
-
-                            <li name='F341'>
-                                <img class="reply_avatar" src="/static/media/avatar/447_64_3.jpg">
-
-                                <div class="reply_body">
-                                    <p>
-
-
-                                            <span class="reply_name">77</span>
-
-                                    </p>
-
-                                    <div class="reply_content">
-                                        <p id="comment_341">顶一下我自己😀</p>
-                                    </div>
-
-                                    <p class="comment_bottom">
-                                        <span>2019-01-23 10:19</span>
-                                        <span class='reply_button'>
-                                            <a href='javascript:void(0);' onclick='reply_click(this);' root='340' role='341' base='77'>回复</a>
-                                        </span>
-                                    </p>
-                                </div>
-                            </li>
-
-                            <li name='F342'>
-                                <img class="reply_avatar" src="/static/media/avatar/447_64_3.jpg">
-
-                                <div class="reply_body">
-                                    <p>
-
-
-                                            <span class="reply_name">77</span>
-                                            <span> 回复 </span>
-                                            <span class="reply_name">77</span>
-
-                                    </p>
-
-                                    <div class="reply_content">
-                                        <p id="comment_342">这个讲的很棒😀</p>
-                                    </div>
-
-                                    <p class="comment_bottom">
-                                        <span>2019-01-23 10:20</span>
-                                        <span class='reply_button'>
-                                            <a href='javascript:void(0);' onclick='reply_click(this);' root='340' role='342' base='77'>回复</a>
-                                        </span>
-                                    </p>
-                                </div>
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-                    <span class="clearfix"></span>
-                </div>
-
-        </div>
-    </div>
-
-{# 新建评论 #}
 <div class="container jumbotron">
-    <div id="div1" class="well-sm" >
+    <div class="vmaig-comment">
+        {% for comment in comments %}
+        <ul>
+
+            <li>
+            <div class="vmaig-comment-tx">
+
+                <img src="{{ comment.user.avatar }}" width="40">
+
+            </div>
+
+            <div class="vmaig-comment-content">
+                <a><h1>{{ comment.username }} 的评论：</h1></a>
+
+{#                 <div class="comment-quote">#}
+{#                    <p>#}
+{#                        <a>@moyo：</a>#}
+{##}
+{#                        加群为什么没人通过啊#}
+{##}
+{#                    </p>#}
+{#                </div>#}
+
+                <p></p>
+                <p>
+                   {{ comment.content | safe }}
+
+                </p>
+                <p>{{ comment.date_publish }} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <a class='quote' href="#anchor-quote" onclick="return CommentQuote('gx_deng',340);">回复</a></p>
+            </div>
+            </li>
+
+        </ul>
+        {% endfor %}
     </div>
-    <input type="button" name="input" class="btn btn-primary btn-block " id="btn_input" value="提交">
 </div>
+
+
 
 
 {% endblock body %}
@@ -202,25 +149,37 @@ document.getElementById('btn_input').addEventListener('click', function () {
     // 获取参数
     content = editor.txt.html()  //评论内容
     article_user_id = $('span[name="blog-user"]').attr('user_id')  //获取文章作者的id
-    article_id = $('div[name="article-id"]').attr('article_id')
-    pid = 1  //父级评论的id
-    alert(articleid)
-    // 组织参数
-    params = {'content':content,'article_user_id':article_user_id, 'article_id':article_id,'pid':pid , 'csrfmiddlewaretoken': csrf}
-    // 发送ajax请求
-     $.ajax({
-        url:"{% url 'public:comment' %}",
-        type:'POST',
-        data: params,
-        processData: false,  // tell jquery not to process the data
-        contentType: false, // tell jquery not to set contentType
-        success: function(data) {
-            if(data.res == 0){
-                location.reload()
-            }
-
+    //article_id = $('div[name="article-id"]').attr('article_id')  // 文章id
+    //父级评论的id
+    {#alert(article_id)#}
+    //校验数据
+    if (content == "<p><br></p>"){
+            alert('文章内容为空')
+            return false
         }
-    }); // end ajax
+    else{
+        // 组织参数
+        params = {'content':content,'article_user_id':article_user_id, 'csrfmiddlewaretoken': csrf}
+        // 发送ajax请求
+         $.ajax({
+            url:"{% url 'user:details' article.id %}",
+            type:'POST',
+            data: params,
+            {#processData: false,  // tell jquery not to process the data#}
+            {#contentType: false, // tell jquery not to set contentType#}
+            success: function(data) {
+                if(data.res == 0){
+                    {#alert('成功了')#}
+                    location.reload()
+                }
+                else {
+                    alert(data.errmsg)
+                }
+
+            }
+        }); // end ajax
+    }
+
 }, false)
 
  //追加内容 在修改文件时能容到

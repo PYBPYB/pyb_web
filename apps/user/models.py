@@ -27,12 +27,13 @@ unique：True表示唯一
 # 采用的继承方式扩展用户信息
 class User(AbstractUser, BaseModel):
 
-    avatar = models.ImageField(upload_to='avatar/%Y/%m', default='static/avatar/default.png', max_length=200, blank=True,
+    avatar = models.ImageField(upload_to='static/avatar/default.png', default=None, max_length=200, blank=True,
                                null=True, verbose_name='用户头像')
     qq = models.CharField(max_length=20, blank=True, null=True, verbose_name='QQ号码')
     weixin = models.CharField(max_length=50, blank=True, null=True, verbose_name='微信')
     mobile = models.CharField(max_length=11, blank=True, null=True, unique=True, verbose_name='手机号码')
     url = models.URLField(max_length=100, blank=True, null=True, verbose_name='个人网页地址')
+    creed = models.CharField(max_length=300, blank=True, default='好好学习，天天向上！', verbose_name='个人信条')
 
     # 使用内部的class Meta 定义模型的元数据
     class Meta:
@@ -46,10 +47,6 @@ class User(AbstractUser, BaseModel):
     # 对象的字符串表达式(unicode格式)
     def __str__(self):
         return self.username
-
-# 个人标签模型
-
-# 个人爱好模型
 
 
 
@@ -79,8 +76,7 @@ class Category(BaseModel):
         return self.name
 
 
-# 自定义一个文章Model的管理器
-# 1、新加一个数据处理的方法
+# 自定义一个文章Model的管理器  新加一个数据处理的方法
 # 2、改变原有的queryset
 class ArticleManager(BaseModel):
     def distinct_date(self):
@@ -128,14 +124,14 @@ class Comment(BaseModel):
     # 目标文章信息
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='用户')
     article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name='文章')
-    pid = models.ForeignKey('self', on_delete=models.CASCADE, verbose_name='父级评论')
+    pid = models.IntegerField(default=0, verbose_name='父级评论id')
 
     class Meta:
         verbose_name = '评论'
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return str(self.id)
+        return str(self.content)
 
 
 # 友情链接(links)模型

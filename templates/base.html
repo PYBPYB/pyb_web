@@ -46,11 +46,17 @@
 
     <link rel="stylesheet" href="/static/css/global/home-2.0.2.css">
 
+{# 搜索结果高粱显示 #}
+{#<title>Black &amp; White</title>#}
+{#    ...#}
+{#    <style>#}
+{#        span.highlighted {#}
+{#            color: red;#}
+{#        }#}
+{#    </style>#}
+
 </head>
-
-<body>
-
-<header class="navbar navbar navbar-static-top navbar-default">
+<header class="navbar navbar navbar-fixed-top navbar-default">
     <div class="container">
         <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -70,14 +76,14 @@
                 </a>
             </li>
             <li class="">
-                <a href="{% url 'user:center' 0 1 %}">
+                <a href="{% url 'user:center'%}">
                     <span class="glyphicon glyphicon-user"></span> 个人中心
                 </a>
             </li>
         </ul>
 
-        <form action="/blog/" class="navbar-form navbar-right">
-            <input name="wd" type="text" placeholder="搜索博文" class="form-control">
+        <form action="/search" method="get" class="navbar-form navbar-right">
+            <input name="q" type="text" placeholder="搜索博文" class="form-control">
             <button type="submit">
                 <span class="glyphicon glyphicon-search"></span>
             </button>
@@ -90,17 +96,21 @@
                     {% if user.is_authenticated %}
 
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                            <img class="navbar-header navbar-avatar" src="{{ user.avatar }}"/>
+{#                            <img class="navbar-header navbar-avatar" src="{{ user.avatar }}"/>#}
                             欢迎，
                             {{ user.username }}
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
 
+                            {# 修改个人信息 #}
+                            <li><a href="{% url 'user:information' %}">修改信息</a></li>
+
+                            {# 修改密码 #}
+                            <li><a href="{% url 'user:write' %}">修改密码</a></li>
+
                             <li><a href="{% url 'user:logout' %}">退出</a></li>
                         </ul>
-
-
                     {% else  %}
                     <a href="{% url 'user:login' %}">登录/注册</a>
                     {% endif %}
@@ -113,17 +123,37 @@
 </header>
 
 
-    {% block body %}{% endblock body %}
+ <body>
+
+
+<div class="header-banner">
+    <div class="container">
+{#            <h1>{{ user.username }}</h1>#}
+{#            <p>只为原创，发表<span class="hidden-xs">个人原创</span>高质量的技术博客</p>#}
+{#            <p>{{ user.email }}的博客</p>#}
+        <h4>&nbsp&nbsp&nbsp&nbsp</h4>
+        <h1>{% block hander_banner_title %}{% endblock hander_banner_title %}</h1>
+        <p>{% block hander_banner_desc %}{% endblock hander_banner_desc %}</p>
+        <p>{% block hander_banner_email %}{% endblock hander_banner_email %}</p>
+
+    </div>
+</div>
+
+
+{% block body %}
+
+{% endblock body %}{# 网页内容 #}
 
 {# 页底 #}
- <div id="footer" class="page-bottom">
+{% block footer %}
+     <div id="footer" class="page-bottom">
         <div class="container">
                 <div class="col-sm-4 hidden-xs">
                     <div class="content">
                         <h4 class="title">关于本站</h4>
                         <p>1、基于Django+Bootstrap开发</p>
                         <p>2、主要发表本人的技术原创博客</p>
-                        <p>3、本站于 2015-12-01 开始建站</p>
+                        <p>3、本站于 2019-3-20 开始建站</p>
                     </div>
                 </div>
 
@@ -131,15 +161,15 @@
                     <div class="content">
                         <h4 class="title">建议反馈</h4>
                         <p>1、可在相应的博文底下评论</p>
-                        <p>2、发邮件到2872402050@qq.com</p>
+                        <p>2、发邮件到2679771017@qq.com</p>
                     </div>
                 </div>
 
                 <div class="col-sm-4 hidden-xs">
                     <div class="content">
                         <h4 class="title">友情链接</h4>
-                        <p><a href="https://zqyhdm.com/" target=_blank>再敲一行代码</a></p>
-                        <p><a href="https://jq.qq.com/?_wv=1027&k=5lSm3eD" title="QQ群：701914136（点击加群）" target=_blank>QQ群：701914136</a></p>
+{#                        <p><a href="https://zqyhdm.com/" target=_blank>再敲一行代码</a></p>#}
+{#                        <p><a href="https://jq.qq.com/?_wv=1027&k=5lSm3eD" title="QQ群：701914136（点击加群）" target=_blank>QQ群：701914136</a></p>#}
                     </div>
                 </div>
             </div>
@@ -147,10 +177,7 @@
                 <span>Welcome to visit my website &copy; Haddy Yang</span>
             </div>
  </div>
-
-
-
-
+{% endblock footer %}
 
     {#网页底部html元素块#}
     {% block bottom %}{% endblock bottom %}

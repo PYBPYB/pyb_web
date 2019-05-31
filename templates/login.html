@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_login.html' %}
 {% load static %}
 
 {% block title %}登录页面{% endblock title %}
@@ -11,6 +11,9 @@
 {% endblock script %}
 
 {% block body %}
+
+{% block header_banner %}
+{% endblock header_banner %}
 
 <div class="modal-dialog">
     <div class="modal-content">
@@ -28,7 +31,7 @@
 
                 <div class="form-group">
                     <label for="">用户名</label>
-                    <input name="username" class="form-control" type="text" placeholder="">
+                    <input name="username" class="form-control" type="text" value="{{ username }}" placeholder="">
                 </div>
 
                 <div class="form-group"><label for="">密码</label>
@@ -57,6 +60,8 @@
         </div>
     </div>
 </div>
+{% block footer %}
+{% endblock footer %}
 {% endblock body %}
 {#网页底部引入文件块#}
 {% block bottomfiles %}
