@@ -16,7 +16,7 @@ construct==2.9.45
 cryptography==2.3.1
 cssselect==1.0.3
 distro==1.4.0
-Django==2.1.7
+Django==2.2.13
 django-bootstrap==0.2.4
 django-haystack==2.8.1
 django-redis==4.10.0
