@@ -40,7 +40,7 @@ kombu==4.4.0
 launchpadlib==1.10.6
 lazr.restfulclient==0.14.2
 lazr.uri==1.0.3
-lxml==4.3.3
+lxml==4.6.5
 macaroonbakery==1.2.1
 Mako==1.0.8
 MarkupSafe==1.1.1
