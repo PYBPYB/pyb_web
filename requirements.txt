@@ -42,7 +42,7 @@ lazr.restfulclient==0.14.2
 lazr.uri==1.0.3
 lxml==4.3.3
 macaroonbakery==1.2.1
-Mako==1.0.8
+Mako==1.2.2
 MarkupSafe==1.1.1
 mutagen==1.42.0
 mycli==1.19.0
