@@ -56,7 +56,7 @@ pefile==2018.8.8
 pexpect==4.6.0
 Pillow==5.4.1
 prompt-toolkit==2.0.9
-protobuf==3.7.1
+protobuf==3.18.3
 ptyprocess==0.6.0
 py-fdfs-client==1.2.6
 py3Fdfs==2.2.0
